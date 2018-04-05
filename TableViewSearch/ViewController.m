@@ -6,8 +6,8 @@
 
 @interface ViewController ()
 
-@property (strong, nonatomic) NSMutableArray    *studentsArray;
-@property (strong, nonatomic) NSArray           *sectionsArray;
+@property (strong, nonatomic) NSMutableArray        *studentsArray;
+@property (strong, nonatomic) NSArray<Section *>    *sectionsArray;
 
 @end
 
@@ -57,6 +57,16 @@
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return [NSString stringWithFormat:@"%ld", (long)[[self.sectionsArray objectAtIndex:section] sectionNumber]];
+}
+
+- (nullable NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    NSMutableArray *temp = [[NSMutableArray alloc] initWithCapacity:self.sectionsArray.count];
+    for (int i = 0; i < self.sectionsArray.count; i++) {
+        NSInteger intNum = [[self.sectionsArray objectAtIndex:i] sectionNumber];
+        [temp addObject: [NSString stringWithFormat:@"%ld", intNum]];
+    }
+    
+    return [NSArray arrayWithArray:temp];
 }
 
 #pragma mark - Additional Methods
