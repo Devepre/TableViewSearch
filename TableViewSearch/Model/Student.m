@@ -6,7 +6,7 @@
 - (instancetype)init {
     NSString *name = [[NSString randomAlphanumericString] capitalizedString];
     NSString *surname = [[NSString randomAlphanumericString] capitalizedString];
-    NSDate *birthDate = [NSDate dateWithTimeIntervalSince1970:arc4random() % 2000000];
+    NSDate *birthDate = [NSDate dateWithTimeIntervalSince1970:arc4random() % 900000000];
     self = [self initWithName:name
                    andSurname:surname
                  andBirthDate:birthDate];
