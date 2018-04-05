@@ -69,6 +69,16 @@
     return [NSArray arrayWithArray:temp];
 }
 
+#pragma mark - UISearchBarDelegate
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
 #pragma mark - Additional Methods
 - (NSArray*) generateSectionsFromArray:(NSArray<Student *> *)arrayStudents {
     NSMutableArray *sectionsArray = [NSMutableArray array];
