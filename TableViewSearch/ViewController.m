@@ -23,10 +23,7 @@
         [self.studentsArray addObject:[[Student alloc] init]];
     }
     
-    NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    NSSortDescriptor *surnameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"surname" ascending:YES];
-    [self.studentsArray sortUsingDescriptors:@[nameDescriptor, surnameDescriptor]];
-    
+    [self sortStudentsArray];
     self.sectionsArray = [self generateSectionsFromArray:self.studentsArray];
 }
 
@@ -93,6 +90,12 @@
     }
     
     return nil;
+}
+
+- (void)sortStudentsArray {
+    NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    NSSortDescriptor *surnameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"surname" ascending:YES];
+    [self.studentsArray sortUsingDescriptors:@[nameDescriptor, surnameDescriptor]];
 }
 
 @end

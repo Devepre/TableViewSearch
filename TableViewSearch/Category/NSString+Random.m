@@ -3,7 +3,7 @@
 @implementation NSString (Random)
 
 + (NSString *)randomAlphanumericString {
-    int length = arc4random() % 11 + 5;
+    int length = arc4random() % 5 + 3;
     
     return [self randomAlphanumericStringWithLength:length];
 }
