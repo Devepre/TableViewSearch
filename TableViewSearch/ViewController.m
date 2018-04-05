@@ -8,6 +8,8 @@
 
 @property (strong, nonatomic) NSMutableArray        *studentsArray;
 @property (strong, nonatomic) NSArray<Section *>    *sectionsArray;
+@property (strong, nonatomic) NSOperation           *operation;
+@property (strong, nonatomic) NSOperationQueue      *operationQueue;
 
 @end
 
@@ -17,14 +19,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    NSInteger sizeArray = 50;
+    self.operationQueue = [[NSOperationQueue alloc] init];
+    
+    NSInteger sizeArray = 50000;
     self.studentsArray = [[NSMutableArray alloc] initWithCapacity:sizeArray];
     for (int i = 0; i < sizeArray; i++) {
         [self.studentsArray addObject:[[Student alloc] init]];
     }
     
     [self sortStudentsArray];
-    self.sectionsArray = [self generateSectionsFromArray:self.studentsArray];
+    self.sectionsArray = [self generateSectionsFromArray:self.studentsArray withFilter:nil];
 }
 
 
@@ -79,11 +83,25 @@
     [searchBar setShowsCancelButton:NO animated:YES];
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self generateSectionsInBackgroundFromArray:self.studentsArray
+                                     withFilter:self.searchBar.text
+                                completionBlock:^{
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [self.tableView reloadData];
+                                    });
+                                }];
+}
+
 #pragma mark - Additional Methods
-- (NSArray*) generateSectionsFromArray:(NSArray<Student *> *)arrayStudents {
+- (NSArray*) generateSectionsFromArray:(NSArray<Student *> *)arrayStudents withFilter:filterString{
     NSMutableArray *sectionsArray = [NSMutableArray array];
     
     for (Student *student in arrayStudents) {
+        if (filterString && [filterString length] > 0 && [student.fullName rangeOfString:filterString].location == NSNotFound) {
+            continue;
+        }
+        
         NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitMonth | NSCalendarUnitYear fromDate:student.birthDate];
         NSInteger currentMonth = [components month];
         
@@ -126,6 +144,21 @@
     NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     NSSortDescriptor *surnameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"surname" ascending:YES];
     [self.studentsArray sortUsingDescriptors:@[monthDescriptor, nameDescriptor, surnameDescriptor]];
+}
+
+- (void)generateSectionsInBackgroundFromArray:studentsArray withFilter:filterString completionBlock:(void (^)(void))completionBlock {
+    [self.operationQueue cancelAllOperations];                  //Cancelling the operations is asynchronous since an in-progress op may take a little while to finish up.
+    [self.operationQueue waitUntilAllOperationsAreFinished];    //Need to wait untill cancel will finish
+    
+    __weak ViewController* weakSelf = self;
+    self.operation = [NSBlockOperation blockOperationWithBlock:^{
+        [self sortStudentsArray];
+        self.sectionsArray = [weakSelf generateSectionsFromArray:self.studentsArray withFilter:filterString];
+        completionBlock();
+        self.operation = nil;
+    }];
+    
+    [self.operationQueue addOperation:self.operation];
 }
 
 @end
