@@ -13,6 +13,8 @@
 		CE42CA7C2076279300F5F0B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE42CA7B2076279300F5F0B9 /* Assets.xcassets */; };
 		CE42CA7F2076279300F5F0B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE42CA7D2076279300F5F0B9 /* LaunchScreen.storyboard */; };
 		CE42CA822076279300F5F0B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42CA812076279300F5F0B9 /* main.m */; };
+		CE42CA8A2076297B00F5F0B9 /* NSString+Random.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42CA892076297B00F5F0B9 /* NSString+Random.m */; };
+		CE42CA8D20762A1000F5F0B9 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42CA8C20762A1000F5F0B9 /* Student.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,10 @@
 		CE42CA7E2076279300F5F0B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE42CA802076279300F5F0B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE42CA812076279300F5F0B9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE42CA882076297B00F5F0B9 /* NSString+Random.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Random.h"; sourceTree = "<group>"; };
+		CE42CA892076297B00F5F0B9 /* NSString+Random.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Random.m"; sourceTree = "<group>"; };
+		CE42CA8B20762A1000F5F0B9 /* Student.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		CE42CA8C20762A1000F5F0B9 /* Student.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,10 +64,13 @@
 		CE42CA712076279200F5F0B9 /* TableViewSearch */ = {
 			isa = PBXGroup;
 			children = (
-				CE42CA722076279200F5F0B9 /* AppDelegate.h */,
-				CE42CA732076279200F5F0B9 /* AppDelegate.m */,
 				CE42CA752076279200F5F0B9 /* ViewController.h */,
 				CE42CA762076279200F5F0B9 /* ViewController.m */,
+				CE42CA8F20762A4B00F5F0B9 /* Model */,
+				CE42CA722076279200F5F0B9 /* AppDelegate.h */,
+				CE42CA882076297B00F5F0B9 /* NSString+Random.h */,
+				CE42CA892076297B00F5F0B9 /* NSString+Random.m */,
+				CE42CA732076279200F5F0B9 /* AppDelegate.m */,
 				CE42CA782076279200F5F0B9 /* Main.storyboard */,
 				CE42CA7B2076279300F5F0B9 /* Assets.xcassets */,
 				CE42CA7D2076279300F5F0B9 /* LaunchScreen.storyboard */,
@@ -69,6 +78,15 @@
 				CE42CA812076279300F5F0B9 /* main.m */,
 			);
 			path = TableViewSearch;
+			sourceTree = "<group>";
+		};
+		CE42CA8F20762A4B00F5F0B9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE42CA8B20762A1000F5F0B9 /* Student.h */,
+				CE42CA8C20762A1000F5F0B9 /* Student.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,7 +159,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE42CA8A2076297B00F5F0B9 /* NSString+Random.m in Sources */,
 				CE42CA772076279200F5F0B9 /* ViewController.m in Sources */,
+				CE42CA8D20762A1000F5F0B9 /* Student.m in Sources */,
 				CE42CA822076279300F5F0B9 /* main.m in Sources */,
 				CE42CA742076279200F5F0B9 /* AppDelegate.m in Sources */,
 			);
