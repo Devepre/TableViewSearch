@@ -16,6 +16,7 @@
 		CE42CA8A2076297B00F5F0B9 /* NSString+Random.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42CA892076297B00F5F0B9 /* NSString+Random.m */; };
 		CE42CA8D20762A1000F5F0B9 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42CA8C20762A1000F5F0B9 /* Student.m */; };
 		CE42CA922076331800F5F0B9 /* NSString+DateString.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42CA912076331800F5F0B9 /* NSString+DateString.m */; };
+		CE42CA962076360700F5F0B9 /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42CA952076360700F5F0B9 /* Section.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		CE42CA8C20762A1000F5F0B9 /* Student.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 		CE42CA902076331800F5F0B9 /* NSString+DateString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+DateString.h"; sourceTree = "<group>"; };
 		CE42CA912076331800F5F0B9 /* NSString+DateString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+DateString.m"; sourceTree = "<group>"; };
+		CE42CA942076360700F5F0B9 /* Section.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
+		CE42CA952076360700F5F0B9 /* Section.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 		CE42CA8F20762A4B00F5F0B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CE42CA942076360700F5F0B9 /* Section.h */,
+				CE42CA952076360700F5F0B9 /* Section.m */,
 				CE42CA8B20762A1000F5F0B9 /* Student.h */,
 				CE42CA8C20762A1000F5F0B9 /* Student.m */,
 			);
@@ -176,6 +181,7 @@
 				CE42CA772076279200F5F0B9 /* ViewController.m in Sources */,
 				CE42CA8D20762A1000F5F0B9 /* Student.m in Sources */,
 				CE42CA822076279300F5F0B9 /* main.m in Sources */,
+				CE42CA962076360700F5F0B9 /* Section.m in Sources */,
 				CE42CA922076331800F5F0B9 /* NSString+DateString.m in Sources */,
 				CE42CA742076279200F5F0B9 /* AppDelegate.m in Sources */,
 			);
