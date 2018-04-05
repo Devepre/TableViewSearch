@@ -15,6 +15,7 @@
 		CE42CA822076279300F5F0B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42CA812076279300F5F0B9 /* main.m */; };
 		CE42CA8A2076297B00F5F0B9 /* NSString+Random.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42CA892076297B00F5F0B9 /* NSString+Random.m */; };
 		CE42CA8D20762A1000F5F0B9 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42CA8C20762A1000F5F0B9 /* Student.m */; };
+		CE42CA922076331800F5F0B9 /* NSString+DateString.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42CA912076331800F5F0B9 /* NSString+DateString.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		CE42CA892076297B00F5F0B9 /* NSString+Random.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Random.m"; sourceTree = "<group>"; };
 		CE42CA8B20762A1000F5F0B9 /* Student.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
 		CE42CA8C20762A1000F5F0B9 /* Student.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		CE42CA902076331800F5F0B9 /* NSString+DateString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+DateString.h"; sourceTree = "<group>"; };
+		CE42CA912076331800F5F0B9 /* NSString+DateString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+DateString.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,8 +71,7 @@
 				CE42CA762076279200F5F0B9 /* ViewController.m */,
 				CE42CA8F20762A4B00F5F0B9 /* Model */,
 				CE42CA722076279200F5F0B9 /* AppDelegate.h */,
-				CE42CA882076297B00F5F0B9 /* NSString+Random.h */,
-				CE42CA892076297B00F5F0B9 /* NSString+Random.m */,
+				CE42CA93207633FD00F5F0B9 /* Category */,
 				CE42CA732076279200F5F0B9 /* AppDelegate.m */,
 				CE42CA782076279200F5F0B9 /* Main.storyboard */,
 				CE42CA7B2076279300F5F0B9 /* Assets.xcassets */,
@@ -87,6 +89,17 @@
 				CE42CA8C20762A1000F5F0B9 /* Student.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CE42CA93207633FD00F5F0B9 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				CE42CA882076297B00F5F0B9 /* NSString+Random.h */,
+				CE42CA892076297B00F5F0B9 /* NSString+Random.m */,
+				CE42CA902076331800F5F0B9 /* NSString+DateString.h */,
+				CE42CA912076331800F5F0B9 /* NSString+DateString.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +176,7 @@
 				CE42CA772076279200F5F0B9 /* ViewController.m in Sources */,
 				CE42CA8D20762A1000F5F0B9 /* Student.m in Sources */,
 				CE42CA822076279300F5F0B9 /* main.m in Sources */,
+				CE42CA922076331800F5F0B9 /* NSString+DateString.m in Sources */,
 				CE42CA742076279200F5F0B9 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
