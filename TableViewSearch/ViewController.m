@@ -1,5 +1,6 @@
 #import "ViewController.h"
 #import "NSString+Random.h"
+#import "NSString+DateString.h"
 #import "Student.h"
 
 @interface ViewController ()
@@ -36,7 +37,11 @@
     static NSString *identifier = @"studentCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    cell.textLabel.text = [[self.studentsArray objectAtIndex:indexPath.row] fullName];
+   
+    Student *student = [self.studentsArray objectAtIndex:indexPath.row];
+    
+    NSString *text = [NSString stringWithFormat:@"%@ %@", [student fullName], [NSString dateWithString:student.birthDate]];
+    cell.textLabel.text = text;
     
     return cell;
 }
