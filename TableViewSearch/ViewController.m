@@ -103,9 +103,19 @@
 }
 
 - (void)sortStudentsArray {
+    NSSortDescriptor *monthDescriptor = [NSSortDescriptor
+                                         sortDescriptorWithKey:@"birthDate"
+                                         ascending:YES
+                                         comparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                                             NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitMonth fromDate:obj1 ];
+                                             NSInteger currentMonth1 = [components month];
+                                             components = [[NSCalendar currentCalendar] components:NSCalendarUnitMonth fromDate:obj2];
+                                             NSInteger currentMonth2 = [components month];
+                                             return currentMonth1 - currentMonth2;
+                                         }];
     NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     NSSortDescriptor *surnameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"surname" ascending:YES];
-    [self.studentsArray sortUsingDescriptors:@[nameDescriptor, surnameDescriptor]];
+    [self.studentsArray sortUsingDescriptors:@[monthDescriptor, nameDescriptor, surnameDescriptor]];
 }
 
 @end
