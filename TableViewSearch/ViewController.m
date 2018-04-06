@@ -48,11 +48,15 @@ typedef NS_ENUM(NSInteger, StudentSortOption) {
     static NSString *identifier = @"studentCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+    }
    
     Student *student = [[[self.sectionsArray objectAtIndex:indexPath.section] itemsArray] objectAtIndex:indexPath.row];
     
-    NSString *text = [NSString stringWithFormat:@"%@ %@", [student fullName], [NSString dateWithString:student.birthDate]];
-    cell.textLabel.text = text;
+//    NSString *text = [NSString stringWithFormat:@"%@ %@", [student fullName], [NSString dateWithString:student.birthDate]];
+    cell.textLabel.text = student.fullName;
+    cell.detailTextLabel.text = [NSString dateWithString:student.birthDate];
     
     return cell;
 }
