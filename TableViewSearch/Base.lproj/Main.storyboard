@@ -40,9 +40,24 @@
                             <outlet property="delegate" destination="Bl8-Qx-vNW" id="F6h-uD-9sy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ZsY-5y-8cK"/>
+                    <navigationItem key="navigationItem" id="ZsY-5y-8cK">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Hxq-pn-SLb">
+                            <rect key="frame" x="72.5" y="7" width="230" height="30"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Birth Date"/>
+                                <segment title="Name"/>
+                                <segment title="Surname"/>
+                            </segments>
+                            <connections>
+                                <action selector="actionSearchControl:" destination="Bl8-Qx-vNW" eventType="valueChanged" id="7RH-cF-j5E"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="tig-Bc-JDg" id="d3g-cX-Qwt"/>
+                        <outlet property="sortingControl" destination="Hxq-pn-SLb" id="0l9-7F-Mkj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Gj-TB-TSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
