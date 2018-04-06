@@ -7,7 +7,7 @@
 typedef NS_ENUM(NSInteger, StudentSortOption) {
     StudentSortOptionBirthDate,
     StudentSortOptionName,
-    StudentSortOptionSurbame,
+    StudentSortOptionSurname,
 };
 
 @interface ViewController ()
@@ -101,10 +101,11 @@ typedef NS_ENUM(NSInteger, StudentSortOption) {
 - (NSArray*) generateSectionsFromArray:(NSArray<Student *> *)arrayStudents withFilter:filterString byOption:(StudentSortOption)option{
     NSMutableArray *sectionsArray = [NSMutableArray array];
 
+    NSString *key = nil;
     NSString *currentLetter = nil;
     
     switch (option) {
-        case 0:
+        case StudentSortOptionBirthDate:
             for (Student *student in arrayStudents) {
                 if (filterString && [filterString length] > 0 && [student.fullName rangeOfString:filterString].location == NSNotFound) {
                     continue;
@@ -131,29 +132,14 @@ typedef NS_ENUM(NSInteger, StudentSortOption) {
                 
             }
             break;
-        case 1:
-            for (int i = 0; i < arrayStudents.count; i++) {
-                NSString *string = [[arrayStudents objectAtIndex:i] name];
-                if (filterString && [filterString length] > 0 && [string rangeOfString:filterString].location == NSNotFound) {
-                    continue;
-                }
-                NSString *firstLetter = [string substringToIndex:1];
-                Section *section = nil;
-                if (![currentLetter isEqualToString:firstLetter]) {
-                    section = [[Section alloc] init];
-                    section.sectionName = firstLetter;
-                    section.itemsArray = [NSMutableArray array];
-                    currentLetter = firstLetter;
-                    [sectionsArray addObject:section];
-                } else {
-                    section = [sectionsArray lastObject];
-                }
-                [section.itemsArray addObject:[arrayStudents objectAtIndex:i]];
+        case StudentSortOptionName:
+            key = @"name";
+        case StudentSortOptionSurname:
+            if (!key) {
+                key = @"surname";
             }
-            break;
-        case 2:
             for (int i = 0; i < arrayStudents.count; i++) {
-                NSString *string = [[arrayStudents objectAtIndex:i] surname];
+                NSString *string = [[arrayStudents objectAtIndex:i] valueForKey:key];
                 if (filterString && [filterString length] > 0 && [string rangeOfString:filterString].location == NSNotFound) {
                     continue;
                 }
@@ -202,20 +188,21 @@ typedef NS_ENUM(NSInteger, StudentSortOption) {
     NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     NSSortDescriptor *surnameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"surname" ascending:YES];
     
+    NSArray<NSSortDescriptor *> *sortDesriptors = nil;
     switch (option) {
         case StudentSortOptionBirthDate:
-            [self.studentsArray sortUsingDescriptors:@[monthDescriptor, nameDescriptor, surnameDescriptor]];
+            sortDesriptors = @[monthDescriptor, nameDescriptor, surnameDescriptor];
             break;
         case StudentSortOptionName:
-            [self.studentsArray sortUsingDescriptors:@[nameDescriptor, surnameDescriptor, monthDescriptor]];
+            sortDesriptors = @[nameDescriptor, surnameDescriptor, monthDescriptor];
             break;
-        case StudentSortOptionSurbame:
-            [self.studentsArray sortUsingDescriptors:@[surnameDescriptor, monthDescriptor, nameDescriptor]];
+        case StudentSortOptionSurname:
+            sortDesriptors = @[surnameDescriptor, monthDescriptor, nameDescriptor];
             break;
         default:
             break;
     }
-    
+    [self.studentsArray sortUsingDescriptors:sortDesriptors];
 }
 
 - (void)generateSectionsInBackgroundFromArray:(NSArray<Student *> *)studentsArray withFilter:(NSString *)filterString byOption:(StudentSortOption)option completionBlock:(void (^)(void))completionBlock {
