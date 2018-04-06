@@ -4,13 +4,19 @@
 #import "Student.h"
 #import "Section.h"
 
+typedef NS_ENUM(NSInteger, StudentSortOption) {
+    StudentSortOptionBirthDate,
+    StudentSortOptionName,
+    StudentSortOptionSurbame,
+};
+
 @interface ViewController ()
 
 @property (strong, nonatomic) NSMutableArray        *studentsArray;
 @property (strong, nonatomic) NSArray<Section *>    *sectionsArray;
 @property (strong, nonatomic) NSOperation           *operation;
 @property (strong, nonatomic) NSOperationQueue      *operationQueue;
-@property (assign, nonatomic) NSInteger             option;
+@property (assign, nonatomic) StudentSortOption     sortOption;
 
 @end
 
@@ -28,8 +34,9 @@
         [self.studentsArray addObject:[[Student alloc] init]];
     }
     
-    [self sortStudentsArrayByOption:0];
-    self.sectionsArray = [self generateSectionsFromArray:self.studentsArray withFilter:nil byOption:0];
+    StudentSortOption sortOption = StudentSortOptionBirthDate;
+    [self sortStudentsArrayByOption:sortOption];
+    self.sectionsArray = [self generateSectionsFromArray:self.studentsArray withFilter:nil byOption:sortOption];
 }
 
 #pragma mark - UITableViewDataSource
@@ -82,7 +89,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [self generateSectionsInBackgroundFromArray:self.studentsArray
                                      withFilter:self.searchBar.text
-                                       byOption:12
+                                       byOption:self.sortOption
                                 completionBlock:^{
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         [self.tableView reloadData];
@@ -91,7 +98,7 @@
 }
 
 #pragma mark - Additional Methods
-- (NSArray*) generateSectionsFromArray:(NSArray<Student *> *)arrayStudents withFilter:filterString byOption:(NSInteger)option{
+- (NSArray*) generateSectionsFromArray:(NSArray<Student *> *)arrayStudents withFilter:filterString byOption:(StudentSortOption)option{
     NSMutableArray *sectionsArray = [NSMutableArray array];
 
     NSString *currentLetter = nil;
@@ -181,7 +188,7 @@
     return nil;
 }
 
-- (void)sortStudentsArrayByOption:(NSInteger)option {
+- (void)sortStudentsArrayByOption:(StudentSortOption)option {
     NSSortDescriptor *monthDescriptor = [NSSortDescriptor
                                          sortDescriptorWithKey:@"birthDate"
                                          ascending:YES
@@ -196,13 +203,13 @@
     NSSortDescriptor *surnameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"surname" ascending:YES];
     
     switch (option) {
-        case 0:
+        case StudentSortOptionBirthDate:
             [self.studentsArray sortUsingDescriptors:@[monthDescriptor, nameDescriptor, surnameDescriptor]];
             break;
-        case 1:
+        case StudentSortOptionName:
             [self.studentsArray sortUsingDescriptors:@[nameDescriptor, surnameDescriptor, monthDescriptor]];
             break;
-        case 2:
+        case StudentSortOptionSurbame:
             [self.studentsArray sortUsingDescriptors:@[surnameDescriptor, monthDescriptor, nameDescriptor]];
             break;
         default:
@@ -211,7 +218,7 @@
     
 }
 
-- (void)generateSectionsInBackgroundFromArray:(NSArray<Student *> *)studentsArray withFilter:(NSString *)filterString byOption:(NSInteger)option completionBlock:(void (^)(void))completionBlock {
+- (void)generateSectionsInBackgroundFromArray:(NSArray<Student *> *)studentsArray withFilter:(NSString *)filterString byOption:(StudentSortOption)option completionBlock:(void (^)(void))completionBlock {
     [self.operationQueue cancelAllOperations];                  //Cancelling the operations is asynchronous since an in-progress op may take a little while to finish up.
     [self.operationQueue waitUntilAllOperationsAreFinished];    //Need to wait untill cancel will finish
     
@@ -229,7 +236,7 @@
 #pragma mark - Actions
 - (IBAction)actionSearchControl:(UISegmentedControl *)sender {
     NSLog(@"%ld", (long)sender.selectedSegmentIndex);
-    self.option = sender.selectedSegmentIndex;
+    self.sortOption = sender.selectedSegmentIndex;
     [self sortStudentsArrayByOption:sender.selectedSegmentIndex];
     self.sectionsArray = [self generateSectionsFromArray:self.studentsArray withFilter:self.searchBar.text byOption:sender.selectedSegmentIndex];
     [self.tableView reloadData];
